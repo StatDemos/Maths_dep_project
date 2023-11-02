@@ -1,6 +1,6 @@
 # Loading libraries
 library(tidyverse)
-
+library(GGally)
 
 # Loading dataset
 marks_data <- read_csv("Clean data set.csv")
@@ -61,6 +61,13 @@ marks_data %>%
        x = "Total Attendance", 
        y = "Final exam marks (out of 100)") 
 
+# Scatter plot matrix (Total attendance as a factor)
+marks_data$Total_Attendance <- as.factor(marks_data$Total_Attendance)
+ggpairs(marks_data, columns = c("Mid_34", "Marks_2", "Grand_Final", "Total_Attendance"), 
+        columnLabels = c("Mid Marks", "Final Marks", "Grand Final Marks", "Total Attendance"))
 
 
+# Scatter plot matrix (Total attendance as a numeric)
+ggpairs(marks_data, columns = c("Mid_34", "Marks_2", "Grand_Final", "Total_Attendance"), 
+        columnLabels = c("Mid Marks", "Final Marks", "Grand Final Marks", "Total Attendance"))
 
