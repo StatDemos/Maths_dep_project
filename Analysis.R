@@ -80,4 +80,31 @@ pairs.panels(marks_data_g2,
              density = TRUE, # show density plots
              ellipses = FALSE)
 
-             
+
+# scatter plot for mid marks (out of 34) vs final marks (out of 100 for paper)
+ggplot(marks_data, aes(x=Mid_34, y=Marks_2))+ 
+  geom_point()+ 
+  xlim(0,34)+ 
+  ylim(0,100) + 
+  labs( 
+       x = "Mid exam marks (out of 34)", 
+       y = "Final exam marks (out of 100)") 
+
+
+# scatter plot for mid marks (out of 20) vs final marks (out of 80 for paper)
+ggplot(marks_data, aes(x=Mid_20, y=Final_80))+ 
+  geom_point()+ 
+  xlim(0,20)+ 
+  ylim(0,80) +
+  labs(
+       x = "Mid exam marks (out of 20)", 
+       y = "Final exam marks (out of 80)") 
+
+
+# Total attendance vs Final grand mark
+ggplot(marks_data, aes(x=Total_Attendance, y=Grand_Final))+ 
+  geom_point()+ 
+  labs(
+       x = "Total Attendance", 
+       y = "Grand final exam marks") 
+
