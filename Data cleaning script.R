@@ -33,5 +33,20 @@ Lin_marks <- Lin_marks %>% select(-c("Max(Mark 1,Mark 2)\r\n(Out of 100)","Final
 # Create Total Attendance variable
 Lin_marks <- Lin_marks %>% mutate(Total_Attendance = Lec_1 + Lec_2 + Lec_3 +Lec_4 + Lec_5 + Lec_6 + Lec_7)
 
+# Fixing the data for absent attendants
+# Assign zero
+Lin_marks <- Lin_marks %>%
+  mutate(Mid_34 = case_when(Mid_34 == "ab" ~ 0, 
+                            .default = as.numeric(Mid_34)),
+         Final_80 = case_when(Final_80 == "ab" ~ 0, 
+                            .default = as.numeric(Final_80)),
+         Marks_1 = case_when(Marks_1 == "ab" ~ 0, 
+                            .default = as.numeric(Marks_1)),
+         Marks_2 = case_when(Marks_2 == "ab" ~ 0, 
+                            .default = as.numeric(Marks_2)),
+         Grand_Final = case_when(Grand_Final == "ab" ~ 0, 
+                            .default = as.numeric(Grand_Final)))
+
+
 # Save data set
-write.csv(Lin_marks,"Clean data set.csv")
+# write.csv(Lin_marks,"Clean data set.csv")
