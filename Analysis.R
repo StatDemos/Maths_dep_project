@@ -35,6 +35,7 @@ ggplot(marks_data, aes(x = Mid_34)) +
        x = "Mid exam marks (out of 34)", 
        y = "Frequency") 
 
+
 # Histogram for Final marks (original marks for paper)
 ggplot(marks_data, aes(x = Grand_Final)) + 
   geom_histogram(aes(y = ..density..), fill = "gray", color = "darkgray", bins = 30) +
@@ -89,6 +90,7 @@ ggplot(marks_data, aes(x=Mid_34, y=Marks_2))+
   labs( 
        x = "Mid exam marks (out of 34)", 
        y = "Final exam marks (out of 100)") 
+
 
 
 # scatter plot for mid marks (out of 20) vs final marks (out of 80 for paper)

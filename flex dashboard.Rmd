@@ -1,0 +1,80 @@
+---
+title: "Evaluation of Student Examination Performance Based on Lecture Attendance"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(GGally)
+library(psych)
+library(plotly)
+
+# Loading data set
+marks_data <- read_csv("Clean data set.csv")
+```
+
+
+
+Row {data-height=200}
+-----------------------------------------------------------------------
+
+### Total number of lectures
+
+```{r}
+lectures <- 7
+valueBox(lectures, icon = "fa-pencil" , color = "#79add4")
+```
+
+### Average student attendance 
+
+```{r}
+avg.att <- round(mean(marks_data$Total_Attendance),2)
+valueBox(avg.att, icon = "ion-android-contacts" , color = "pink")
+```
+
+### Average final exam mark
+
+```{r}
+avg.mark <- round(mean(marks_data$Grand_Final),2)
+valueBox(avg.mark, icon = "ion-arrow-graph-up-right" , color = "#af79d4")
+```
+
+Row {data-height=800}
+-----------------------------------------------------------------------
+
+### **Scatter plot for Mid marks vs Final marks**
+
+```{r}
+#(out of 34) 
+#(out of 100 for paper)
+
+p1 <- marks_data %>% mutate(Total_Attendance = as.factor(Total_Attendance)) %>% ggplot(aes(x=Mid_34, y=Marks_2, col=Total_Attendance, 
+  text = paste("Index No: ", Index_No, "<br>Mid mark (out of 34): ", Mid_34 , "<br>Final paper mark (out of 100): ", Marks_2, "<br>Grand final mark (out of 100): ", Grand_Final))) + 
+  geom_point()+ 
+  xlim(0,34)+ 
+  ylim(0,100) + 
+  labs( 
+       x = "Mid exam marks (out of 34)", 
+       y = "Final exam marks (out of 100)") + theme(aspect.ratio = 1)
+
+ggplotly(p1,tooltip = "text") %>% layout(legend=list(title=list(text='Attendance')))
+```
+
+### **Scatter plot for Total attendance vs Grand final mark**
+
+```{r}
+p2 <- ggplot(marks_data, aes(x=Total_Attendance, y=Grand_Final, 
+                             text = paste("Index No: ", Index_No, "<br>Attendance: " , Total_Attendance,"<br>Grand final mark: ", Grand_Final)))+ 
+  
+  geom_point( col="#2360b0")+ xlim(0,7)+ 
+  labs(
+       x = "Total attendance", 
+       y = "Grand final exam marks") + theme(aspect.ratio = 1) + scale_x_continuous(limits = c(0, 7), breaks = 0:7) 
+
+ggplotly(p2,tooltip = "text")
+```
+
