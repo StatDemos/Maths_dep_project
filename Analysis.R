@@ -42,9 +42,24 @@ ggplot(marks_data, aes(x = Grand_Final)) +
        x = "Final exam marks (out of 100)", 
        y = "Frequency") 
 
+# Distribution of mid marks by attendance
+marks_data %>%
+  mutate(Total_Attendance = as.factor(Total_Attendance)) %>%
+ggplot(aes(y = Mid_34, x = Total_Attendance, fill = Total_Attendance)) + 
+  geom_boxplot() +
+  labs(title = "Distribution of final exam marks by attendance", 
+       x = "Mid exam marks (out of 34)", 
+       y = "Total Attendance") 
 
 
-
+# Distribution of final marks by attendance
+marks_data %>%
+  mutate(Total_Attendance = as.factor(Total_Attendance)) %>%
+  ggplot(aes(y = Grand_Final, x = Total_Attendance, fill = Total_Attendance)) + 
+  geom_boxplot() +
+  labs(title = "Distribution of final exam marks by attendance", 
+       x = "Total Attendance", 
+       y = "Final exam marks (out of 100)") 
 
 
 
