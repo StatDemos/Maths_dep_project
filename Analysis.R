@@ -1,6 +1,7 @@
 # Loading libraries
 library(tidyverse)
 library(GGally)
+library(psych)
 
 # Loading dataset
 marks_data <- read_csv("Clean data set.csv")
@@ -71,3 +72,12 @@ ggpairs(marks_data, columns = c("Mid_34", "Marks_2", "Grand_Final", "Total_Atten
 ggpairs(marks_data, columns = c("Mid_34", "Marks_2", "Grand_Final", "Total_Attendance"), 
         columnLabels = c("Mid Marks", "Final Marks", "Grand Final Marks", "Total Attendance"))
 
+# Other Scatter plot matrices
+marks_data_g2 <- marks_data %>% select("Mid_34", "Marks_2", "Grand_Final", "Total_Attendance")
+pairs.panels(marks_data_g2, 
+             method = "pearson", # correlation method
+             hist.col = "#00AFBB",
+             density = TRUE, # show density plots
+             ellipses = FALSE)
+
+             
