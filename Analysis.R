@@ -12,14 +12,14 @@ marks_data_g1 <- marks_data %>% select(9:15) %>%
   pivot_longer(cols = 1:7, names_to = "Lecture.Number", values_to = "Attendance") %>%
   filter(Attendance == 1)
 
-ggplot(marks_data_g1, aes(x=Lecture.Number)) + geom_bar() + 
+ggplot(marks_data_g1, aes(x=Lecture.Number)) + geom_bar(fill = "darkgray") + 
   labs(title = "Students attendance per lecture", x = "Lecture", 
        y = "Total attendace") + 
   geom_text(aes(label=after_stat(count)),stat='count',position=position_dodge(0.9),
             vjust=-0.2)
 
 # Bar chart of Total attendance
-ggplot(marks_data, aes(x=Total_Attendance)) + geom_bar() + 
+ggplot(marks_data, aes(x=Total_Attendance)) + geom_bar(fill = "darkgray") + 
   labs(title = "Total count of student's attendance for lectures", 
        x = "Number of lectures", 
        y = "Total attendace") + 
