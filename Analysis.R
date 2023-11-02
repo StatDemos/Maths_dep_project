@@ -26,8 +26,21 @@ ggplot(marks_data, aes(x=Total_Attendance)) + geom_bar() +
   geom_text(aes(label=after_stat(count)),stat='count',position=position_dodge(0.9),
             vjust=-0.2) + scale_x_continuous(breaks = seq(0,7,1))
 
+# Histogram for Mid marks (original marks for paper)
+ggplot(marks_data, aes(x = Mid_34)) + 
+  geom_histogram(aes(y = ..density..), fill = "gray", color = "darkgray", bins = 30) +
+  geom_density(alpha = 0.3, fill = "blue") +
+  labs(title = "Distribution of mid exam marks", 
+       x = "Mid exam marks (out of 34)", 
+       y = "Frequency") 
 
-
+# Histogram for Final marks (original marks for paper)
+ggplot(marks_data, aes(x = Grand_Final)) + 
+  geom_histogram(aes(y = ..density..), fill = "gray", color = "darkgray", bins = 30) +
+  geom_density(alpha = 0.3, fill = "blue") +
+  labs(title = "Distribution of final exam marks", 
+       x = "Final exam marks (out of 100)", 
+       y = "Frequency") 
 
 
 
