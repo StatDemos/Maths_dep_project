@@ -30,6 +30,7 @@ ggplot(marks_data, aes(x=Total_Attendance)) + geom_bar(fill = "darkgray") +
   geom_text(aes(label=after_stat(count)),stat='count',position=position_dodge(0.9),
             vjust=-0.2) + scale_x_continuous(breaks = seq(0,7,1))
 
+
 # Histogram for Mid marks (original marks for paper)
 ggplot(marks_data, aes(x = Mid_34)) + 
   geom_histogram(aes(y = ..density..), fill = "gray", color = "darkgray", bins = 30) +
@@ -83,7 +84,7 @@ pairs.panels(marks_data_g2,
 
 # scatter plot for mid marks (out of 34) vs final marks (out of 100 for paper)
 ggplot(marks_data, aes(x=Mid_34, y=Marks_2))+ 
-  geom_point()+ 
+  geom_point()+  geom_smooth(method=lm , color="red", se=FALSE) +
   xlim(0,34)+ 
   ylim(0,100) + 
   labs( 
@@ -92,7 +93,7 @@ ggplot(marks_data, aes(x=Mid_34, y=Marks_2))+
 
 # scatter plot for mid marks (out of 20) vs final marks (out of 80 for paper)
 ggplot(marks_data, aes(x=Mid_20, y=Final_80))+ 
-  geom_point()+ 
+  geom_point()+  geom_smooth(method=lm , color="red", se=FALSE) +
   xlim(0,20)+ 
   ylim(0,80) +
   labs(
@@ -101,7 +102,7 @@ ggplot(marks_data, aes(x=Mid_20, y=Final_80))+
 
 # Total attendance vs Final grand mark
 ggplot(marks_data, aes(x=Total_Attendance, y=Grand_Final))+ 
-  geom_point()+ 
+  geom_point()+  geom_smooth(method=lm , color="red", se=FALSE) +
   labs(
     x = "Total Attendance", 
     y = "Grand final exam marks") 
