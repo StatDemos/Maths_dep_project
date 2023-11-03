@@ -72,8 +72,21 @@ ggpairs(marks_data, columns = c("Mid_34", "Marks_2", "Grand_Final", "Total_Atten
         columnLabels = c("Mid Marks", "Final Marks", "Grand Final Marks", "Total Attendance"))
 
 # Scatter plot matrix (Total attendance as a numeric)
-ggpairs(marks_data, columns = c("Mid_34", "Marks_2", "Grand_Final", "Total_Attendance"), 
-        columnLabels = c("Mid Marks", "Final Marks", "Grand Final Marks", "Total Attendance"))
+# Function to return points and geom_smooth
+# allow for the method to be changed
+my_fn <- function(data, mapping, method="loess", ...){
+  p <- ggplot(data = data, mapping = mapping) + 
+    geom_point() + 
+    geom_smooth(method=method, ...)
+  p
+}
+
+# Use wrap to add further arguments; change method to lm
+ggpairs(marks_data, columns = c("Mid_34", "Marks_2", "Grand_Final", "Total_Attendance"),
+        columnLabels = c("Mid Marks", "Final Marks", "Grand Final Marks", "Total Attendance"),
+        lower = list(continuous = wrap(my_fn, method="lm", colour = "red")),
+        diag = list(continuous = wrap("barDiag", fill = "#189bb5", colour = "black")))
+
 
 # Other Scatter plot matrices
 marks_data_g2 <- marks_data %>% select("Mid_34", "Marks_2", "Grand_Final", "Total_Attendance")
