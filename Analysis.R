@@ -151,3 +151,9 @@ mean(as.numeric(marks_data$Total_Attendance))
 sd(as.numeric(marks_data$Total_Attendance))
 
 
+
+
+
+
+
+
