@@ -6,7 +6,10 @@ library(psych)
 # Loading dataset
 marks_data <- read_csv("Clean data set.csv")
 
-# Graphs
+################################################################################
+################################################################################
+
+### Graphs
 
 # Bar chart of students attendance per lecture
 marks_data_g1 <- marks_data %>% select(9:15) %>% 
@@ -35,7 +38,6 @@ ggplot(marks_data, aes(x = Mid_34)) +
        x = "Mid exam marks (out of 34)", 
        y = "Frequency") 
 
-
 # Histogram for Final marks (original marks for paper)
 ggplot(marks_data, aes(x = Grand_Final)) + 
   geom_histogram(aes(y = ..density..), fill = "gray", color = "darkgray", bins = 30) +
@@ -47,12 +49,11 @@ ggplot(marks_data, aes(x = Grand_Final)) +
 # Distribution of mid marks by attendance
 marks_data %>%
   mutate(Total_Attendance = as.factor(Total_Attendance)) %>%
-ggplot(aes(y = Mid_34, x = Total_Attendance, fill = Total_Attendance)) + 
+  ggplot(aes(y = Mid_34, x = Total_Attendance, fill = Total_Attendance)) + 
   geom_boxplot() +
   labs(title = "Distribution of final exam marks by attendance", 
        x = "Mid exam marks (out of 34)", 
        y = "Total Attendance") 
-
 
 # Distribution of final marks by attendance
 marks_data %>%
@@ -68,7 +69,6 @@ marks_data$Total_Attendance <- as.factor(marks_data$Total_Attendance)
 ggpairs(marks_data, columns = c("Mid_34", "Marks_2", "Grand_Final", "Total_Attendance"), 
         columnLabels = c("Mid Marks", "Final Marks", "Grand Final Marks", "Total Attendance"))
 
-
 # Scatter plot matrix (Total attendance as a numeric)
 ggpairs(marks_data, columns = c("Mid_34", "Marks_2", "Grand_Final", "Total_Attendance"), 
         columnLabels = c("Mid Marks", "Final Marks", "Grand Final Marks", "Total Attendance"))
@@ -81,17 +81,14 @@ pairs.panels(marks_data_g2,
              density = TRUE, # show density plots
              ellipses = FALSE)
 
-
 # scatter plot for mid marks (out of 34) vs final marks (out of 100 for paper)
 ggplot(marks_data, aes(x=Mid_34, y=Marks_2))+ 
   geom_point()+ 
   xlim(0,34)+ 
   ylim(0,100) + 
   labs( 
-       x = "Mid exam marks (out of 34)", 
-       y = "Final exam marks (out of 100)") 
-
-
+    x = "Mid exam marks (out of 34)", 
+    y = "Final exam marks (out of 100)") 
 
 # scatter plot for mid marks (out of 20) vs final marks (out of 80 for paper)
 ggplot(marks_data, aes(x=Mid_20, y=Final_80))+ 
@@ -99,14 +96,58 @@ ggplot(marks_data, aes(x=Mid_20, y=Final_80))+
   xlim(0,20)+ 
   ylim(0,80) +
   labs(
-       x = "Mid exam marks (out of 20)", 
-       y = "Final exam marks (out of 80)") 
-
+    x = "Mid exam marks (out of 20)", 
+    y = "Final exam marks (out of 80)") 
 
 # Total attendance vs Final grand mark
 ggplot(marks_data, aes(x=Total_Attendance, y=Grand_Final))+ 
   geom_point()+ 
   labs(
-       x = "Total Attendance", 
-       y = "Grand final exam marks") 
+    x = "Total Attendance", 
+    y = "Grand final exam marks") 
+
+################################################################################
+################################################################################
+
+### Summary Measures
+
+################################################################################
+
+## Attendance per lecture (mean and standard deviation)
+
+# lecture 1
+mean(marks_data$Lec_1)
+sd(marks_data$Lec_1)
+
+# lecture 2
+mean(marks_data$Lec_2)
+sd(marks_data$Lec_2)
+
+# lecture 3
+mean(marks_data$Lec_3)
+sd(marks_data$Lec_3)
+
+# lecture 4
+mean(marks_data$Lec_4)
+sd(marks_data$Lec_4)
+
+# lecture 5
+mean(marks_data$Lec_5)
+sd(marks_data$Lec_5)
+
+# lecture 6
+mean(marks_data$Lec_6)
+sd(marks_data$Lec_6)
+
+# lecture 7
+mean(marks_data$Lec_7)
+sd(marks_data$Lec_7)
+
+################################################################################
+
+## Average Attendance for all lectures (mean and standard deviation)
+
+mean(as.numeric(marks_data$Total_Attendance))
+sd(as.numeric(marks_data$Total_Attendance))
+
 
