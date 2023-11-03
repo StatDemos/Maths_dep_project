@@ -82,6 +82,7 @@ my_fn <- function(data, mapping, method="loess", ...){
 }
 
 # Use wrap to add further arguments; change method to lm
+marks_data$Total_Attendance <- as.numeric(marks_data$Total_Attendance)
 ggpairs(marks_data, columns = c("Mid_34", "Marks_2", "Grand_Final", "Total_Attendance"),
         columnLabels = c("Mid Marks", "Final Marks", "Grand Final Marks", "Total Attendance"),
         lower = list(continuous = wrap(my_fn, method="lm", colour = "red")),
