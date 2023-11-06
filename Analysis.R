@@ -168,6 +168,8 @@ sd(marks_data$Lec_7)
 mean(as.numeric(marks_data$Total_Attendance))
 sd(as.numeric(marks_data$Total_Attendance))
 
+means smdnak
+
 
 
 
